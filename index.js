@@ -1,3 +1,2 @@
-module.exports = () => {
-  // ...
-};
+const read = require('./funtions')
+

@@ -1,2 +1,2 @@
-const read = require('./funtions')
+const readDir = require('./functions')
 

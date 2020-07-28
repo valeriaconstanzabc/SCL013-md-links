@@ -1,4 +1,4 @@
-const read = require('../funtions');
+const read = require('../functions');
 
 describe ('read', () => {
   test('es una función', () => {
@@ -6,11 +6,3 @@ describe ('read', () => {
   })
 })
 
-
-/* describe('mdLinks', () => {
-
-  it('should...', () => {
-    console.log('FIX ME!');
-  });
-
-}); */

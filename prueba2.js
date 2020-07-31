@@ -45,13 +45,26 @@ const readDir = () => {
                         Link:href,
                         Titulo:text,
                         Ruta:path,
-                        //Archivo: file
                       })
 
                     }
                     marked(data, { renderer : renderer })
                     let resultGet = getLinks(links);
-                    console.log(resultGet)
+                    // console.log(resultGet)
+
+                    resultGet.map((element) => {
+                      fetch(element.Link)
+                        .then(res => {
+                          if(res.status == 200) {
+                            console.log(chalk.blue('[✔]'), chalk.cyan(element.Link), chalk.bgBlue(` ${res.status} ${res.statusText} `), chalk.yellow(element.Titulo));
+                          }
+                          else {
+                            console.log(chalk.red('[X]'), chalk.cyan(element.Link), chalk.bgRed(` ${res.status} ${res.statusText} `), chalk.white(element.Titulo));
+                          }
+                        })
+                        .catch((err) => console.log(chalk.gray('[-]'), chalk.cyan(element.Link), chalk.bgRed(` ${err.type} ${err.code} `), chalk.white(element.Titulo)));
+                    })
+
                   }
                 }
             })

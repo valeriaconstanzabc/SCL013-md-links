@@ -5,7 +5,7 @@ const fetch = require('node-fetch');
 const chalk = require('chalk');
 const emoji = require('node-emoji')
 
-//<-------------------CREAMOS RUTA ABSOLUTA-------......------>
+//<-------------------CREAMOS RUTA ABSOLUTA------------------->
 let path = __dirname;
 path = pathNPM.resolve(path); //Resuelve la ruta relativa a absoluta
 path = pathNPM.normalize(path); //Se deshace de elementos extras en la ruta

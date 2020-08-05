@@ -23,7 +23,7 @@ Dentro de una comunidad de código abierto, nos han propuesto crear una herramie
 
 ***
 
-## 3. Instrucciones de instalación/uso
+## 3. Instrucciones de instalación y uso
 
 > 1. Debes tener instalado node.js y npm
 

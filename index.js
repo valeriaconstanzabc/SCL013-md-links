@@ -133,8 +133,8 @@ const linksValidate = (resultLinks) => {
             ((emoji.get('imp'))),
             chalk.black.bgMagenta('  ',elem.Titulo.substring(0,50),'  ', '\n'),
             chalk.magenta.bold('['),
-            //chalk.magenta(elem.Link.substring(0,50)),
-            chalk.magenta.x(elem.Link.substring(0,50)), //LINKS SIN CONEXIÓN
+            chalk.magenta(elem.Link.substring(0,50)),
+            //chalk.magenta.x(elem.Link.substring(0,50)), //LINKS SIN CONEXIÓN
             chalk.magenta.bold(']'),
           )
         }

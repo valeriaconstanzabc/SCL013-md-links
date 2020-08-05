@@ -6,7 +6,7 @@
 
 Creado originalmente por John Gruber, con ayuda de Aaron Swartz en 2004,  Markdown es un **lenguaje de marcado** que facilita la aplicación de formato a un texto plano empleando una serie de caracteres de una forma especial. Con formato nos referimos a itálicas, negritas, listas, encabezados, citas, código en línea o en bloque, vínculos y más.
 
-> Para ver formatos completo [click aquí](https://markdown.es/sintaxis-markdown/)
+> Para ver formatos completo [Click aquí](https://markdown.es/sintaxis-markdown/)
 
 ### Resumen del producto
 Markdown es muy utilizado en plataformas como GitHub, foros, blogs como también para crear documentación y es muy común encontrar varios archivos en ese formato en cualquier tipo de repositorio.
@@ -25,49 +25,53 @@ Dentro de una comunidad de código abierto, nos han propuesto crear una herramie
 
 ## 3. Instrucciones de instalación y uso
 
-> 1. Debes tener instalado node.js y npm
+> ### 1. Debes tener instalado node.js y npm
 
-> 2. Para instalar nuestra librería
+> ### 2. Para instalar nuestra librería:
 
-    Aqui va el comando
+    npm install AleKristen/SCL013-md-links
 
-> 2. Comando de ejecución:
+> ### 3. Importa la librería en tu proyecto:
 
-    node tuArchivo.js
+    const nombreLibreria = require('md-links')
 
-> 3. Uso de la librería:
+> ### 4. Uso de la librería:
 
-* Opción 1: Muestra los links extraidos de los archivos con extensión .md
+* **Opción 1:** Muestra los links extraidos del archivo con extensión .md que ingreses
 
-      node tuArchivo.js
+      node tuArchivo.js tuArchivo.md
 
-* Opción 2: Muestra la validación de links
+* **Opción 2:** Muestra la validación de links del archivo con extensión .md que ingreses
 
-      node archivo.js -v | node archivo.js --validate
+      node archivo.js tuArchivo.md -v | node archivo.js tuArchivo.md --validate
 
-* Opción 3: Muestra estadísticas: Links totales | Links únicos
+* **Opción 3:** Muestra estadísticas del archivo con extensión .md que ingreses: Links totales | Links únicos
 
-      node archivo.js -s | node archivo.js --stats
+      node archivo.js tuArchivo.md -s | node archivo.js tuArchivo.md --stats
+
+* **Opción 4:** Muestra estadísticas más links dañados del archivo con extensión .md que ingreses: Links totales | Links únicos | Links dañados
+
+      node archivo.js tuArchivo.md -s -v | node archivo.js tuArchivo.md -v -s
 
 ***
 
 
 ## 4. Ejemplos de como se ve en consola
 
-* Opción 1: **node tuArchivo.js**
+>### Opción 1: **node tuArchivo.js**
 
 ![Links](./imagenes/1.png)
 
-* Opción 2: **node tuArchivo.js -v | node tuArchivo.js --validate**
+>### Opción 2: **node tuArchivo.js -v | node tuArchivo.js --validate**
 
 ![Validación](./imagenes/2.png)
 ![Validación](./imagenes/3.png)
 
-* Opción 3: **node tuArchivo.js -s | node tuArchivo.js --stats**
+>### Opción 3: **node tuArchivo.js -s | node tuArchivo.js --stats**
 
 ![Flujo](./imagenes/4.png)
 
-* Opción 4: **node tuArchivo.js -s -v| node tuArchivo.js -v -s**
+>### Opción 4: **node tuArchivo.js -s -v| node tuArchivo.js -v -s**
 
 ![Flujo](./imagenes/5.png)
 

@@ -77,7 +77,7 @@ Dentro de una comunidad de código abierto, nos han propuesto crear una herramie
 * [x] Uso de funciones (parámetros | argumentos | valor de retorno)
 * [x] Manipular arrays (filter | map | sort | reduce)
 * [x] Manipular objects (key | value)
-* [x] Uso ES modules (import | export)
+* [ ] Uso ES modules (import | export)
 * [x] Uso de callbacks
 * [x] Consumo de Promesas
 * [x] Creación de Promesas
@@ -101,7 +101,7 @@ Dentro de una comunidad de código abierto, nos han propuesto crear una herramie
 
 * [x] Organizar y dividir el código en módulos (Modularización)
 * [x] Uso de identificadores descriptivos (Nomenclatura | Semántica)
-* [ ] Uso de linter (ESLINT)
+* [x] Uso de linter (ESLINT)
 
 ### Git y GitHub
 

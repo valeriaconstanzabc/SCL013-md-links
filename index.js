@@ -17,7 +17,7 @@ const readDir = () => {
     //con readdir, propiedad de fs, leemos todos los archivos que tenemos en el directorio
     fs.readdir(path, (err, files) => {
       if(err){
-        reject('ERROR - No se puede leer el directorio', err)
+        console.log('ERROR - No se puede leer el directorio', err)
       }
       else {
         console.log(
@@ -172,7 +172,7 @@ const linksValidate = (resultLinks, file) => {
           )
         }
       })
-      .catch((err) => {
+      .catch(() => {
         console.log(
           chalk.magenta((emoji.get('arrow_right'))),
           ((emoji.get('alien'))),
@@ -250,5 +250,5 @@ const linksBroken = (resultLinks) => {
 // }
 
 //<----------------EXPORTAMOS MÓDULO PROMESA------------------>
-module.exports.readDir = readDir();
+module.exports = readDir();
 

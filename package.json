@@ -1,7 +1,7 @@
 {
   "name": "md-links",
   "version": "0.1.0",
-  "description": "* [1. Preámbulo](#1-preámbulo)\r * [2. Resumen del proyecto](#2-resumen-del-proyecto)\r * [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)\r * [4. Consideraciones generales](#4-consideraciones-generales)\r * [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptación-mínimos-del-proyecto)\r * [6. Entregables](#6-entregables)\r * [7. Hacker edition](#7-hacker-edition)\r * [8. Pistas, tips y lecturas complementarias](#8-pistas-tips-y-lecturas-complementarias)\r * [9. Checklist](#9-checklist)",
+  "description": "* [1. Definición del proyecto](#1-definición-del-proyecto)\r * [2. Diagrama de flujo](#2-diagrama-de-flujo)\r * [3. Instrucciones de instalación y uso](#3-instrucciones-de-instalación-y-uso)\r * [4. Ejemplos de como se ve en consola](#4-ejemplos-de-como-se-ve-en-consola)\r * [5. Objetivos de aprendizaje](#5-objetivos-de-aprendizaje)\r * [6. Entregables](#6-entregables)",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/valeriaconstanzabc/SCL013-md-links.git"
+    "url": "git+https://github.com/AleKristen/SCL013-md-links.git"
   },
   "author": "Alejandra Silva y Valeria Brito",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/valeriaconstanzabc/SCL013-md-links/issues"
+    "url": "https://github.com/AleKristen/SCL013-md-links/issues"
   },
-  "homepage": "https://github.com/valeriaconstanzabc/SCL013-md-links#readme",
+  "homepage": "https://github.com/AleKristen/SCL013-md-links#readme",
   "devDependencies": {
     "eslint": "^7.6.0",
     "jest": "^26.1.0"

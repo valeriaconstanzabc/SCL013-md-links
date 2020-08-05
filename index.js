@@ -6,42 +6,42 @@ const chalk = require('chalk');
 const emoji = require('node-emoji')
 
 //<-------------------CREAMOS RUTA ABSOLUTA------------------->
-let path = __dirname;
+let path = process.argv[2];
 path = pathNPM.resolve(path); //Resuelve la ruta relativa a absoluta
 path = pathNPM.normalize(path); //Se deshace de elementos extras en la ruta
 
 
 //<-------FUNCIÓN QUE LEE DIRECTORIO-------------------------->
-const readDir = () => {
+// const readDir = () => {
 
-    //con readdir, propiedad de fs, leemos todos los archivos que tenemos en el directorio
-    fs.readdir(path, (err, files) => {
-      if(err){
-        console.log('ERROR - No se puede leer el directorio', err)
-      }
-      else {
-        console.log(
-          chalk.cyan('\n','\n','Links validos:', (emoji.get('innocent'))),
-          chalk.blue('|'),
-          chalk.magenta('Links dañados:', (emoji.get('imp'))),
-          chalk.blue('|'),
-          chalk.magenta('Links sin conexión:', (emoji.get('alien')))
-        )
+//     //con readdir, propiedad de fs, leemos todos los archivos que tenemos en el directorio
+//     fs.readdir(path, (err, files) => {
+//       if(err){
+//         console.log('ERROR - No se puede leer el directorio', err)
+//       }
+//       else {
+//         console.log(
+//           chalk.cyan('\n','\n','Links validos:', (emoji.get('innocent'))),
+//           chalk.blue('|'),
+//           chalk.magenta('Links dañados:', (emoji.get('imp'))),
+//           chalk.blue('|'),
+//           chalk.magenta('Links sin conexión:', (emoji.get('alien')))
+//         )
 
-        console.log(chalk.blue('---------------------------------------------------------------------------------------'))
-        files.map(file => {
+//         console.log(chalk.blue('---------------------------------------------------------------------------------------'))
+//         files.map(file => {
 
-          //con extname, propiedad de path hacemos una comparación con el archivo .md
-          if(pathNPM.extname(file) === '.md'){
-            console.log(chalk.white.italic((emoji.get('open_file_folder')),'Archivo leído: ', file))
-            console.log(chalk.blue('---------------------------------------------------------------------------------------'))
+//           //con extname, propiedad de path hacemos una comparación con el archivo .md
+//           if(pathNPM.extname(file) === '.md'){
+//             console.log(chalk.white.italic((emoji.get('open_file_folder')),'Archivo leído: ', file))
+//             console.log(chalk.blue('---------------------------------------------------------------------------------------'))
 
-            readFiles(err, file)
-          }
-        })
-      }
-    })
-}
+//             readFiles(err, file)
+//           }
+//         })
+//       }
+//     })
+// }
 
 
 //<----------FUNCIÓN QUE FILTRA LINKS HTTP----------------------->
@@ -74,7 +74,7 @@ const readFiles = (err, file) => {
     }
     else {
       //con readFile, propiedad de fs, leemos los archivos que nos arrojó el directorio
-      fs.readFile(file, 'utf-8', (err, data) => {
+      fs.readFile(path, 'utf-8', (err, data) => {
 
         if(err){
           reject('ERROR - No se puede leer el archivo', err)
@@ -98,8 +98,8 @@ const readFiles = (err, file) => {
           marked(data, { renderer : renderer })
 
           let resultLinks = filterLinks(links);
-          let argv2 = process.argv[2]
-          let argv3 = process.argv[3]
+          let argv2 = process.argv[3]
+          let argv3 = process.argv[4]
           if (argv2 == '-v' && argv3 == '-s' || argv2 == '-s' && argv3 == '-v') {
             // Aquí solo se resuelve con el primer array generado
             linksStats(links, file)
@@ -248,5 +248,5 @@ const linksBroken = (resultLinks, file) => {
 
 
 //<----------------EXPORTAMOS MÓDULO PROMESA------------------>
-module.exports = readDir();
+module.exports = readFiles();
 

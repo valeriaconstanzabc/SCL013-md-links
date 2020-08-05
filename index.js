@@ -103,7 +103,7 @@ const readFiles = (err, file) => {
           if (argv2 == '-v' && argv3 == '-s' || argv2 == '-s' && argv3 == '-v') {
             // Aquí solo se resuelve con el primer array generado
             linksStats(links, file)
-            linksBroken(links)
+            linksBroken(links, file)
             return;
           } else if (argv2 == '--stats' || argv2 == '-s' ) {
             linksStats(links, file)
@@ -167,7 +167,8 @@ const linksValidate = (resultLinks, file) => {
             chalk.black.bgMagenta(`${' '}${file}${' '}`),
             chalk.magenta.dim(elem.Titulo.substring(0,50)),
             chalk.magenta.bold(`${'['}`),
-            chalk.magenta.x(`${elem.Link.substring(0,50)}`),
+            chalk.magenta(`${elem.Link.substring(0,50)}`),
+            //chalk.magenta.x(`${elem.Link.substring(0,50)}`), //LINKS SIN CONEXIÓN
             chalk.magenta.bold(`${']'}`),
           )
         }
@@ -201,7 +202,7 @@ const linksStats = (links, file) => {
   console.log(
     '\n',
     chalk.magenta((emoji.get('arrow_right'))),
-    chalk.black.bold.bgMagenta(`${'  '}${file}${' '}`),
+    chalk.black.bold.bgMagenta(`${'  '}${file}${'   '}`),
     '\n',
     chalk.black.bgBlue(' Links totales: '),
     chalk.blue.bold(totalLinks.length),
@@ -214,40 +215,37 @@ const linksStats = (links, file) => {
 
 
 //<----------FUNCION QUE IMPRIME TOTAL LINKS DAÑADOS---------->
-const linksBroken = (resultLinks) => {
-  let brokenLinks = 0;
+const linksBroken = (resultLinks, file) => {
+  let brokenLinks = [];
+  return new Promise((resolve, reject) => {
   resultLinks.map((elem) => {
-    fetch(elem.Link)
-
-    .then((res) => {
-      if (res.status != 200 ) {
-        brokenLinks++
+    brokenLinks.push(fetch(elem.Link)
+    .then(res => {
+      return {
+        statusLinks: res.status
       }
-      console.log(
-        '\n',
-        chalk.black.bgMagenta('Links dañados: '),
-        chalk.magenta(brokenLinks)
-      );
     })
     .catch((err) => {
-      console.log(err)
-    })
+      reject(err)
+    }));
   })
+  resolve (Promise.all(brokenLinks))
+  })
+  .then((res) => {
+   console.log(
+    '\n',
+    chalk.yellow((emoji.get('arrow_right'))),
+    chalk.yellow((emoji.get('weary'))),
+    chalk.black.bold.bgYellow(`${'  '}${file}${' '}`),
+    '\n',
+    chalk.black.bgYellow('  Links dañados: '),
+    chalk.yellow.bold(res.filter(link => link.statusLinks !=200 ).length)
+    );
+  })
+
 }
 
-//---------cuenta broken igual que links totales :(----------
 
-// const linksBroken = (resultLinks) => {
-//   let countBroken = 0;
-//   for(let i = 0; i < resultLinks.length; i++) {
-//       if (resultLinks[i].status != 200) {
-//           countBroken++
-//       }
-//   }
-//   console.log(
-//       chalk.black.bgMagenta('Broken: '),
-//       chalk.magenta(countBroken));
-// }
 
 //<----------------EXPORTAMOS MÓDULO PROMESA------------------>
 module.exports = readDir();

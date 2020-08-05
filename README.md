@@ -63,9 +63,13 @@ Dentro de una comunidad de código abierto, nos han propuesto crear una herramie
 ![Validación](./imagenes/2.png)
 ![Validación](./imagenes/3.png)
 
-* Opción 2: **node tuArchivo.js -s | node tuArchivo.js --stats**
+* Opción 3: **node tuArchivo.js -s | node tuArchivo.js --stats**
 
 ![Flujo](./imagenes/4.png)
+
+* Opción 4: **node tuArchivo.js -s -v| node tuArchivo.js -v -s**
+
+![Flujo](./imagenes/5.png)
 
 ***
 

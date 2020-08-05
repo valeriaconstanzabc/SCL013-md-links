@@ -1,6 +1,6 @@
-const fs = require("fs");
+const fs = require('fs');
 const pathNPM = require('path');
-const marked = require("marked");
+const marked = require('marked');
 const fetch = require('node-fetch');
 const chalk = require('chalk');
 const emoji = require('node-emoji')
@@ -14,37 +14,34 @@ path = pathNPM.normalize(path); //Se deshace de elementos extras en la ruta
 //<-------FUNCIÓN QUE LEE DIRECTORIO-------------------------->
 const readDir = () => {
 
-  return new Promise ((resolve, reject) => {
-
     //con readdir, propiedad de fs, leemos todos los archivos que tenemos en el directorio
     fs.readdir(path, (err, files) => {
       if(err){
         reject('ERROR - No se puede leer el directorio', err)
       }
       else {
+        console.log(
+          chalk.cyan('\n','\n','Links validos:', (emoji.get('innocent'))),
+          chalk.blue('|'),
+          chalk.magenta('Links dañados:', (emoji.get('imp'))),
+          chalk.blue('|'),
+          chalk.magenta('Links sin conexión:', (emoji.get('alien')))
+        )
+
         console.log(chalk.blue('---------------------------------------------------------------------------------------'))
         files.map(file => {
 
           //con extname, propiedad de path hacemos una comparación con el archivo .md
-          if(pathNPM.extname(file) === ".md"){
-            console.log((emoji.get('open_file_folder')),'Archivo leído: ', file)
+          if(pathNPM.extname(file) === '.md'){
+            console.log(chalk.white.italic((emoji.get('open_file_folder')),'Archivo leído: ', file))
             console.log(chalk.blue('---------------------------------------------------------------------------------------'))
 
             readFiles(err, file)
-            // .then((file) => {
-            //   console.log(file)
-            //   return;
-            // })
-            // .catch(err => {
-            //   console.log(err);
-            // })
           }
         })
       }
     })
-  })
 }
-
 
 
 //<----------FUNCIÓN QUE FILTRA LINKS HTTP----------------------->
@@ -52,7 +49,7 @@ const filterLinks = (links) => {
   //Creamos nuevo array vacio
   let arrayFilterLinks = [];
 
-  //recorremos los "links"
+  //recorremos los 'links'
 	links.map((element) => {
 
     //Creamos una variable en donde entramos a nuestra propiedad Link, con
@@ -65,7 +62,6 @@ const filterLinks = (links) => {
 
 	return arrayFilterLinks;
 };
-
 
 
 //<----------FUNCIÓN QUE LEE ARCHIVOS .MD------------------------->
@@ -136,9 +132,9 @@ const readFiles = (err, file) => {
 const linksDefault = (resultLinks, file) => {
   resultLinks.map((elem) => {
     console.log(
-      chalk.blue(emoji.get('arrow_right')),
+      chalk.yellow(emoji.get('arrow_right')),
       chalk.black.bgBlue(`${' '}${file}${' '}`),
-      chalk.cyan.dim(elem.Titulo.substring(0,50)),
+      chalk.yellow.dim(elem.Titulo.substring(0,50)),
       chalk.blue.bold(`${'['}`),
       chalk.blue(`${elem.Link.substring(0,50)}`),
       chalk.blue.bold(`${']'}`)
@@ -171,10 +167,8 @@ const linksValidate = (resultLinks, file) => {
             chalk.black.bgMagenta(`${' '}${file}${' '}`),
             chalk.magenta.dim(elem.Titulo.substring(0,50)),
             chalk.magenta.bold(`${'['}`),
-            chalk.magenta(`${elem.Link.substring(0,50)}`),
+            chalk.magenta.x(`${elem.Link.substring(0,50)}`),
             chalk.magenta.bold(`${']'}`),
-
-            //chalk.black.red(` ${res.status} ${res.statusText} `)
           )
         }
       })
@@ -205,22 +199,21 @@ const linksStats = (links, file) => {
   let uniqueLinks = new Set(totalLinks);
 
   console.log(
-    "\n",
-    chalk.black.bgBlue(`${' '}${file}${' '}`),
-    "\n",
+    '\n',
+    chalk.magenta((emoji.get('arrow_right'))),
+    chalk.black.bold.bgMagenta(`${'  '}${file}${' '}`),
+    '\n',
     chalk.black.bgBlue(' Links totales: '),
-    chalk.blue(totalLinks.length),
-    "\n",
-    chalk.black.bgCyan(' Links únicos: '),
-    chalk.cyan(uniqueLinks.size),
-    "\n"
+    chalk.blue.bold(totalLinks.length),
+    '\n',
+    chalk.black.bgCyan(' Links únicos:  '),
+    chalk.cyan.bold(uniqueLinks.size),
+    '\n'
   );
 }
 
 
-
 //<----------FUNCION QUE IMPRIME TOTAL LINKS DAÑADOS---------->
-// cuenta bien pero por cada link
 const linksBroken = (resultLinks) => {
   let brokenLinks = 0;
   resultLinks.map((elem) => {
@@ -231,8 +224,8 @@ const linksBroken = (resultLinks) => {
         brokenLinks++
       }
       console.log(
-        "\n",
-        chalk.black.bgMagenta("Links dañados: "),
+        '\n',
+        chalk.black.bgMagenta('Links dañados: '),
         chalk.magenta(brokenLinks)
       );
     })
@@ -252,7 +245,7 @@ const linksBroken = (resultLinks) => {
 //       }
 //   }
 //   console.log(
-//       chalk.black.bgMagenta("Broken: "),
+//       chalk.black.bgMagenta('Broken: '),
 //       chalk.magenta(countBroken));
 // }
 

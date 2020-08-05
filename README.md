@@ -15,9 +15,13 @@ Estos archivos Markdown normalmente contienen links (vínculos/ligas) que muchas
 
 Dentro de una comunidad de código abierto, nos han propuesto crear una herramienta usando Node.js, que permite al usuario recorrer un directorio, filtrar los archivos en formato Markdown y extraer los links que contengan para verificar su estado: sin conexión, útiles o rotos y dar algunas estadísticas que se imprimirán en consola como la cantidad de links, el estado de los links y los links únicos.
 
+***
+
 ## 2. Diagrama de flujo
 
-![Flujo](https://i.ibb.co/R6ZSyfp/Md-Links-New-frame.jpg)
+![Flujo](./imagenes/Flujo.jpg)
+
+***
 
 ## 3. Instrucciones de instalación/uso
 
@@ -33,26 +37,83 @@ Dentro de una comunidad de código abierto, nos han propuesto crear una herramie
 
 > 3. Uso de la librería:
 
-* opc 1: muestra los links
+* Opción 1: Muestra los links extraidos de los archivos con extensión .md
 
       node tuArchivo.js
 
-* opc 2: muestra estadísticas: Links totales | Links unicos | Links rotos
-
-      node archivo.js -v -s | node archivo.js -v -s
-
-* opc 3: muestra los links con su estado
+* Opción 2: Muestra la validación de links
 
       node archivo.js -v | node archivo.js --validate
 
-* opc 4: muestra estadísticas: Links totales | Links unicos
+* Opción 3: Muestra estadísticas: Links totales | Links únicos
 
       node archivo.js -s | node archivo.js --stats
 
+***
 
-## 4. Documentación del API
 
-## 5. Ejemplos de como se ve en consola
+## 4. Ejemplos de como se ve en consola
 
-## 6. Objetivos de aprendizaje
+* Opción 1: **node tuArchivo.js**
 
+![Links](./imagenes/1.png)
+
+* Opción 2: **node tuArchivo.js -v | node tuArchivo.js --validate**
+
+![Validación](./imagenes/2.png)
+![Validación](./imagenes/3.png)
+
+* Opción 2: **node tuArchivo.js -s | node tuArchivo.js --stats**
+
+![Flujo](./imagenes/4.png)
+
+***
+
+## 5. Objetivos de aprendizaje
+
+### JavaScript
+
+* [x] Uso de condicionales (if-else | switch | operador ternario)
+* [x] Uso de funciones (parámetros | argumentos | valor de retorno)
+* [x] Manipular arrays (filter | map | sort | reduce)
+* [x] Manipular objects (key | value)
+* [ ] Uso ES modules (import | export)
+* [x] Uso de callbacks
+* [x] Consumo de Promesas
+* [x] Creación de Promesas
+
+### Node
+
+* [x] Uso de sistema de archivos. (fs, path)
+* [x] Instalar y usar módulos (npm)
+* [x] Creación de modules (CommonJS)
+* [x] Configuración de package.json
+* [x] Configuración de npm-scripts
+* [x] Uso de CLI (Command Line Interface - Interfaz de Línea de Comando)
+
+### Testing
+
+* [ ] Testeo unitario
+* [ ] Testeo asíncrono
+* [ ] Uso de Mocks manuales.
+
+### Estructura del código y guía de estilo
+
+* [x] Organizar y dividir el código en módulos (Modularización)
+* [x] Uso de identificadores descriptivos (Nomenclatura | Semántica)
+* [x] Uso de linter (ESLINT)
+
+### Git y GitHub
+
+* [x] Uso de comandos de git (add | commit | pull | status | push)
+* [x] Manejo de repositorios de GitHub (clone | fork | gh-pages)
+* [x] Colaboración en Github (branches | pull requests | |tags)
+* [ ] Organización en Github (projects | issues | labels | milestones)
+
+### HTTP
+
+* [ ] Verbos HTTP (http.get)
+
+### Fundamentos de programación
+
+* [x] Recursión

@@ -6,6 +6,7 @@ const chalk = require('chalk');
 const emoji = require('node-emoji')
 
 //<-------------------CREAMOS RUTA ABSOLUTA------------------->
+//process es la palabra ingresada por el usuario.
 let path = process.argv[2];
 //Resuelve la ruta relativa a absoluta
 path = pathNPM.resolve(path);
@@ -17,8 +18,8 @@ path = pathNPM.normalize(path);
 const filterLinks = (links) => {
   //Creamos nuevo array vacio
   let arrayFilterLinks = [];
-  //recorremos los 'links'
 
+  //recorremos los 'links' con .map
 	links.map((element) => {
     //Creamos una variable en donde entramos a nuestra propiedad Link, con
     //substring nos devuelve una parte de la cadena que comparamos con http
@@ -53,7 +54,7 @@ const readFiles = (err) => {
         chalk.magenta('Links sin conexión:', (emoji.get('alien')), '\n'),
         chalk.blue.bold('---------------------------------------------------------------------------------------')
       )
-      //Con readFile, propiedad de fs, leemos los archivos que nos arrojó el directorio.
+      //Con readFile, propiedad de fs, leemos el archivo ingresado.
       fs.readFile(path, 'utf-8', (err, data) => {
 
         if(err){
@@ -69,20 +70,22 @@ const readFiles = (err) => {
           //Dentro de renderer quedan guardados los links con título y ruta
           renderer.link = (href, title, text) => {
             links.push({
-            Link:href,
-            Titulo:text,
-            Ruta:path,
+              Link:href,
+              Titulo:text,
+              Ruta:path,
             })
           }
           //Lamamos a la libreria y le entregamos nuestra data de likes y
           //creamos un objeto con la info de renderer(links)
           marked(data, { renderer : renderer })
+          //Al resultado de los links, le entregamos la función que filtra por http.
           let resultLinks = filterLinks(links);
 
           //Info ingresada por el usuario que rescatamos con process.
           let argv2 = process.argv[3]
           let argv3 = process.argv[4]
 
+          //Creamos condiciones a las que se le entrega cada función que se quiere leer.
           if (argv2 == '-v' && argv3 == '-s' || argv2 == '-s' && argv3 == '-v') {
             linksStats(links)
             linksBroken(links)
@@ -112,7 +115,7 @@ const readFiles = (err) => {
 const linksDefault = (resultLinks) => {
 
   console.log(' ')
-  //Recorremos el resultado de nuestros links.
+  //Recorremos el resultado de nuestros links con .map.
   resultLinks.map((elem) => {
     console.log(
       chalk.yellow(emoji.get('arrow_right')),
@@ -120,6 +123,7 @@ const linksDefault = (resultLinks) => {
       chalk.black.bgBlue(' ',elem.Titulo.substring(0,50),' ','\n'),
       chalk.blue.bold('  ['),
       //Con elem.link traemos nuestro link desde el array creado con marked
+      //en donde el link está truncado a 50 carácteres.
       chalk.blue(elem.Link.substring(0,50)),
       chalk.blue.bold(']')
     )
@@ -136,7 +140,7 @@ const linksValidate = (resultLinks) => {
   console.log(' ')
   //Recorremos el resultado de nuestros links.
   resultLinks.map((elem) => {
-    //Llamamos a fetch para poder acceder a status de cada uno de nuestros links.
+    //Llamamos a fetch para poder acceder al status de cada uno de nuestros links.
     fetch(elem.Link)
       .then(res => {
         //al acceder al status podemos dar como condición que nos entregue todos
@@ -152,7 +156,7 @@ const linksValidate = (resultLinks) => {
           )
         }
         else {
-          //En su defecto que nos entregue los links dañados
+          //En su defecto que nos entregue los links dañados que no son 200(error 404)
           console.log(
             chalk.magenta((emoji.get('arrow_right'))),
             ((emoji.get('imp'))),
@@ -187,12 +191,13 @@ const linksStats = (links) => {
   let totalLinks = [];
   //recorremos todos nuestros links con un forEach
   links.forEach(elem => {
-    //pusheamos esa info encontra al array creado anteriormente.
+    //pusheamos esa info encontra(links por default), al array creado anteriormente.
     totalLinks.push(elem.Link);
   });
   //el set es parecido al array solo que permite almacenar elementos
   //sin que se repitan, por lo que podemos contar los links únicos.
   let uniqueLinks = new Set(totalLinks);
+
   console.log(
     chalk.blue('\n',(emoji.get('arrow_right'))),
     chalk.black.bgBlue(' Links totales: '),
@@ -224,6 +229,7 @@ const linksBroken = (resultLinks) => {
         reject(err)
       }));
     })
+    //retorna array de links con su status
     resolve (Promise.all(brokenLinks))
   })
   .then((res) => {
@@ -241,5 +247,6 @@ const linksBroken = (resultLinks) => {
 
 
 //<----------------EXPORTAMOS MÓDULO PROMESA------------------>
+//Llamamos a la función
 module.exports = readFiles();
 
